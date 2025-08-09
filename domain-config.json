@@ -1,0 +1,25 @@
+{
+  "customDomain": "AItradingWeb3.com",
+  "targetUrl": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co",
+  "methods": {
+    "cloudflare": {
+      "type": "Page Rules",
+      "rule": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co/*",
+      "setting": "Forwarding URL",
+      "statusCode": 301,
+      "destinationUrl": "AItradingWeb3.com/$1"
+    },
+    "namecheap": {
+      "type": "URL Redirect",
+      "source": "AItradingWeb3.com",
+      "destination": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co",
+      "redirectType": "Permanent (301)"
+    },
+    "godaddy": {
+      "type": "Forwarding",
+      "domain": "AItradingWeb3.com",
+      "forwardTo": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co",
+      "redirectType": "Permanent"
+    }
+  }
+}

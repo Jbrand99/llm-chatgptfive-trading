@@ -1,0 +1,22 @@
+{
+  "domain": "AItradingWeb3.com",
+  "target": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co",
+  "rules": [
+    {
+      "url": "*AItradingWeb3.com/*",
+      "action": "forwarding_url",
+      "status": 301,
+      "destination": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co/$1"
+    },
+    {
+      "url": "AItradingWeb3.com",
+      "action": "forwarding_url", 
+      "status": 301,
+      "destination": "https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co"
+    }
+  ],
+  "ssl": {
+    "always_https": true,
+    "mode": "flexible"
+  }
+}

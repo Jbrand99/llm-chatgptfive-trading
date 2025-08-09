@@ -1,0 +1,16 @@
+Namecheap URL Redirect Configuration:
+====================================
+1. Login to Namecheap account
+2. Go to Domain List → Manage
+3. Advanced DNS → Add Record
+4. Type: URL Redirect Record
+5. Host: @
+6. Value: https://db1066b1-f9b5-425d-b211-cb0414c1c1c6.chatgptfive10.repl.co
+7. TTL: Automatic
+8. Save changes
+
+Subdomain (www):
+Type: CNAME Record
+Host: www  
+Value: AItradingWeb3.com
+TTL: Automatic
