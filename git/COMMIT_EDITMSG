@@ -1,0 +1,8 @@
+Provide guides for deploying the trading platform to a custom domain
+
+Detail various methods for external domain deployment, including Cloudflare forwarding, direct DNS, and registrar forwarding, along with setup scripts and configuration files.
+
+Replit-Commit-Author: Agent
+Replit-Commit-Session-Id: dedef169-ac38-4e88-9d4c-0e37ff1e1610
+Replit-Commit-Checkpoint-Type: full_checkpoint
+Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/db1066b1-f9b5-425d-b211-cb0414c1c1c6/dedef169-ac38-4e88-9d4c-0e37ff1e1610/6tSReOQ
