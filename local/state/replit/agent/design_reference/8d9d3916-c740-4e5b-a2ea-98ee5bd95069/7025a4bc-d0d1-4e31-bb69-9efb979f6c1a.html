@@ -1,0 +1,414 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpaca Trading Platform - Account Connection Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#64748B',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-inter bg-slate-50 min-h-screen">
+    <!-- @COMPONENT: Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-slate-900">Alpaca Trading Platform</h1>
+                        <p class="text-xs text-slate-500">Account Connection Dashboard</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-slate-600">
+                        <div class="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+                        <span data-bind="connection.status">Connected</span>
+                    </div>
+                    <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- @COMPONENT: ConnectionStatus -->
+        <div class="mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold text-slate-900">Connection Status</h2>
+                    <button data-event="click:refreshConnections" class="inline-flex items-center px-3 py-2 border border-slate-300 shadow-sm text-sm leading-4 font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 transition-colors">
+                        <i class="fas fa-sync-alt mr-2"></i>
+                        Refresh
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Broker Account Connection -->
+                    <div class="border border-slate-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-building text-primary"></i>
+                                <h3 class="font-medium text-slate-900">Broker Account</h3>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm text-success font-medium">Connected</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Endpoint:</span>
+                                <span class="text-slate-900 font-mono text-xs">broker-api.sandbox.alpaca.markets</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">API Key:</span>
+                                <span class="text-slate-900 font-mono text-xs" data-mock="true">CKX2Y2X6F1BMZVCT0M29</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Last Verified:</span>
+                                <span class="text-slate-900" data-bind="broker.lastVerified">2 minutes ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Account Connection -->
+                    <div class="border border-slate-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-chart-candlestick text-primary"></i>
+                                <h3 class="font-medium text-slate-900">Trading Account</h3>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm text-success font-medium">Connected</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Endpoint:</span>
+                                <span class="text-slate-900 font-mono text-xs">api.alpaca.markets</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">API Key:</span>
+                                <span class="text-slate-900 font-mono text-xs" data-mock="true">AKGOAFEQ5N8KGDNLAWPV</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Last Verified:</span>
+                                <span class="text-slate-900" data-bind="trading.lastVerified">1 minute ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: ConnectionStatus -->
+
+        <!-- @COMPONENT: AccountOverview -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Account Information -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Account Information</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Account ID</label>
+                                <p class="text-sm text-slate-900 font-mono bg-slate-50 px-3 py-2 rounded" data-bind="account.id" data-mock="true">ALB-12345678</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Account Type</label>
+                                <p class="text-sm text-slate-900" data-bind="account.type" data-mock="true">Paper Trading</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success" data-bind="account.status" data-mock="true">
+                                    <div class="w-1.5 h-1.5 bg-success rounded-full mr-1"></div>
+                                    Active
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Created</label>
+                                <p class="text-sm text-slate-900" data-bind="account.created" data-mock="true">March 15, 2024</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Trading Permissions</label>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800" data-mock="true">Stocks</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800" data-mock="true">Options</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800" data-mock="true">Crypto</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Day Trading BP</label>
+                                <p class="text-sm text-slate-900 font-semibold" data-bind="account.dayTradingBuyingPower" data-mock="true">$25,000.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Summary -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Portfolio Summary</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm text-slate-600">Total Value</span>
+                                <span class="text-lg font-semibold text-slate-900" data-bind="portfolio.totalValue" data-mock="true">$50,247.83</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="text-slate-600">Today's Change</span>
+                                <span class="text-success font-medium" data-bind="portfolio.todayChange" data-mock="true">+$342.18 (+0.68%)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-slate-200 pt-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-600">Buying Power</span>
+                                <span class="text-sm font-semibold text-slate-900" data-bind="portfolio.buyingPower" data-mock="true">$12,532.45</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-600">Cash</span>
+                                <span class="text-sm font-semibold text-slate-900" data-bind="portfolio.cash" data-mock="true">$8,247.32</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-600">Positions</span>
+                                <span class="text-sm font-semibold text-slate-900" data-bind="portfolio.positionsCount" data-mock="true">12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connection Health -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Connection Health</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-600">API Response Time</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm font-medium text-slate-900" data-bind="health.responseTime" data-mock="true">42ms</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-600">Rate Limit</span>
+                            <span class="text-sm font-medium text-slate-900" data-bind="health.rateLimit" data-mock="true">185/200</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-600">Last Error</span>
+                            <span class="text-sm text-slate-500" data-bind="health.lastError" data-mock="true">None</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: AccountOverview -->
+
+        <!-- @COMPONENT: RecentActivity -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 mb-8">
+            <div class="px-6 py-4 border-b border-slate-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-slate-900">Recent API Activity</h3>
+                    <button class="text-sm text-primary hover:text-primary/80 font-medium">View All</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="text-left py-3 text-sm font-medium text-slate-600">Timestamp</th>
+                                <th class="text-left py-3 text-sm font-medium text-slate-600">Endpoint</th>
+                                <th class="text-left py-3 text-sm font-medium text-slate-600">Method</th>
+                                <th class="text-left py-3 text-sm font-medium text-slate-600">Status</th>
+                                <th class="text-left py-3 text-sm font-medium text-slate-600">Response Time</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <!-- @MAP: activities.map(activity => ( -->
+                            <tr data-mock="true">
+                                <td class="py-3 text-sm text-slate-900">2024-03-15 14:32:18</td>
+                                <td class="py-3 text-sm text-slate-900 font-mono">/v2/account</td>
+                                <td class="py-3 text-sm text-slate-900">GET</td>
+                                <td class="py-3 text-sm">
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success/10 text-success">200</span>
+                                </td>
+                                <td class="py-3 text-sm text-slate-900">45ms</td>
+                            </tr>
+                            <tr data-mock="true">
+                                <td class="py-3 text-sm text-slate-900">2024-03-15 14:31:52</td>
+                                <td class="py-3 text-sm text-slate-900 font-mono">/v2/positions</td>
+                                <td class="py-3 text-sm text-slate-900">GET</td>
+                                <td class="py-3 text-sm">
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success/10 text-success">200</span>
+                                </td>
+                                <td class="py-3 text-sm text-slate-900">38ms</td>
+                            </tr>
+                            <tr data-mock="true">
+                                <td class="py-3 text-sm text-slate-900">2024-03-15 14:31:25</td>
+                                <td class="py-3 text-sm text-slate-900 font-mono">/v2/orders</td>
+                                <td class="py-3 text-sm text-slate-900">POST</td>
+                                <td class="py-3 text-sm">
+                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success/10 text-success">201</span>
+                                </td>
+                                <td class="py-3 text-sm text-slate-900">67ms</td>
+                            </tr>
+                            <!-- @END_MAP )) -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: RecentActivity -->
+
+        <!-- @COMPONENT: ErrorHandling -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Error Logs -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                <div class="px-6 py-4 border-b border-slate-200">
+                    <h3 class="text-lg font-semibold text-slate-900">Error Logs</h3>
+                </div>
+                <div class="p-6">
+                    <div class="text-center py-8">
+                        <i class="fas fa-check-circle text-4xl text-success mb-3"></i>
+                        <p class="text-slate-600" data-mock="true">No recent errors detected</p>
+                        <p class="text-sm text-slate-500 mt-1">All API connections are functioning normally</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connection Settings -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                <div class="px-6 py-4 border-b border-slate-200">
+                    <h3 class="text-lg font-semibold text-slate-900">Connection Settings</h3>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-slate-300 text-primary focus:ring-primary" data-implementation="Should toggle auto-retry functionality">
+                            <span class="ml-2 text-sm text-slate-700">Auto-retry failed connections</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-slate-300 text-primary focus:ring-primary" data-implementation="Should toggle connection monitoring">
+                            <span class="ml-2 text-sm text-slate-700">Monitor connection health</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-slate-300 text-primary focus:ring-primary" data-implementation="Should toggle debug logging">
+                            <span class="ml-2 text-sm text-slate-700">Enable debug logging</span>
+                        </label>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-slate-200">
+                        <div class="flex space-x-3">
+                            <button data-event="click:testConnection" class="flex-1 bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+                                Test Connection
+                            </button>
+                            <button data-event="click:resetCredentials" class="flex-1 bg-slate-100 text-slate-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-200 transition-colors">
+                                Reset Credentials
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: ErrorHandling -->
+    </div>
+
+    <!-- Loading Overlay (Hidden by default) -->
+    <!-- @STATE: isLoading:boolean = false -->
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden" id="loadingOverlay" data-implementation="Should show/hide based on loading state">
+        <div class="flex items-center justify-center h-full">
+            <div class="bg-white rounded-lg p-6 shadow-xl max-w-sm mx-4">
+                <div class="flex items-center space-x-3">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <div>
+                        <h3 class="font-medium text-slate-900">Connecting to Alpaca API</h3>
+                        <p class="text-sm text-slate-600" data-bind="loading.message">Verifying credentials...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            // Simulated connection status updates
+            const statusElements = document.querySelectorAll('[data-bind*="connection"]');
+            const healthElements = document.querySelectorAll('[data-bind*="health"]');
+            
+            // TODO: Replace with actual API calls to Alpaca endpoints
+            function updateConnectionStatus() {
+                // This would normally check actual API connectivity
+                console.log('Checking connection status...');
+            }
+            
+            function handleRefreshConnections() {
+                // TODO: Implement actual connection refresh logic
+                console.log('Refreshing connections...');
+            }
+            
+            function handleTestConnection() {
+                // TODO: Implement connection testing with provided credentials
+                console.log('Testing API connection...');
+            }
+            
+            function handleResetCredentials() {
+                // TODO: Implement secure credential reset functionality
+                console.log('Resetting credentials...');
+            }
+            
+            // Event listeners for interactive elements
+            document.querySelectorAll('[data-event*="refreshConnections"]').forEach(button => {
+                button.addEventListener('click', handleRefreshConnections);
+            });
+            
+            document.querySelectorAll('[data-event*="testConnection"]').forEach(button => {
+                button.addEventListener('click', handleTestConnection);
+            });
+            
+            document.querySelectorAll('[data-event*="resetCredentials"]').forEach(button => {
+                button.addEventListener('click', handleResetCredentials);
+            });
+            
+            // Periodic status updates (would be replaced with real-time data)
+            setInterval(updateConnectionStatus, 30000);
+        })();
+    </script>
+</body>
+</html>
